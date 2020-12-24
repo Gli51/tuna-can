@@ -6,8 +6,7 @@ var str_elapsed = "00 : 00"
 
 func _ready():
 	$HeaderTimer/Timer.set_text(str_elapsed)
-	#item below just makes the button white instead of the godot head. deletelater
-	$Lower/RecordButton.modulate = Color(255,255,255)
+	$Lower/RecordButton/ButtonSprite.animation =  "default"
 
 func _process(delta):
 	if recording == true:
@@ -15,7 +14,7 @@ func _process(delta):
 		_increment_timer()
 	else:
 		elapsed = 0
-	
+		
 
 func _increment_timer():
 	"""Called from _process(delta) when recording has started. Increments the minutes and seconds on the timer label."""
@@ -31,12 +30,12 @@ func _on_TextureButton_toggled(button_pressed):
 		str_elapsed = "00 : 00"
 		_increment_timer()
 		#toggles recording button appearance
-		$Lower/RecordButton.modulate = Color(0,0,0)
+		$Lower/RecordButton/ButtonSprite.animation =  "recording"
 		#stop any playback that's happening + clear the temp cache
 		#disable playback button(greyed out)
 		#begin recording from the mic + storing in temp file
 	else:
-		$Lower/RecordButton.modulate = Color(255,255,255)
+		$Lower/RecordButton/ButtonSprite.animation =  "default"
 		#reset record button color
 		#enable playback button
 
