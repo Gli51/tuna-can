@@ -1,12 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Scripts/Metronome.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/Record.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Graphics/SnazzyOrange.tres" type="Theme" id=1]
+[ext_resource path="res://Scripts/Metronome.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Record.gd" type="Script" id=3]
+[ext_resource path="res://Graphics/Montserrat-Medium.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+use_filter = true
+font_data = ExtResource( 4 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 1 )
 
 [node name="Background" type="ColorRect" parent="."]
 margin_right = 576.0
@@ -16,41 +24,38 @@ color = Color( 0.239216, 0.239216, 0.239216, 1 )
 [node name="Tabs" type="TabContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 60.0
+margin_top = 80.0
 
-[node name="Tuner" type="Tabs" parent="Tabs"]
+[node name="TUNER" type="Tabs" parent="Tabs"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = 10.0
+margin_top = 71.0
+margin_right = -10.0
 
-[node name="Metronome" type="Tabs" parent="Tabs"]
-visible = false
+[node name="METRONOME" type="Tabs" parent="Tabs"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-script = ExtResource( 1 )
+margin_left = 10.0
+margin_top = 71.0
+margin_right = -10.0
+script = ExtResource( 2 )
 
-[node name="MetroVizualizer" type="Control" parent="Tabs/Metronome"]
-margin_right = 568.0
+[node name="MetroVizualizer" type="Control" parent="Tabs/METRONOME"]
+anchor_right = 1.0
 margin_bottom = 110.0
 
-[node name="ColorRect" type="ColorRect" parent="Tabs/Metronome/MetroVizualizer"]
+[node name="ColorRect" type="ColorRect" parent="Tabs/METRONOME/MetroVizualizer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.160784, 0.160784, 0.160784, 1 )
+color = Color( 0.14902, 0.14902, 0.14902, 1 )
 
-[node name="IncrementRow" type="Control" parent="Tabs/Metronome"]
+[node name="IncrementRow" type="Control" parent="Tabs/METRONOME"]
 margin_top = 110.0
 margin_right = 568.0
 margin_bottom = 260.0
 
-[node name="TimeSig" type="MarginContainer" parent="Tabs/Metronome/IncrementRow"]
+[node name="TimeSig" type="MarginContainer" parent="Tabs/METRONOME/IncrementRow"]
 margin_right = 288.0
 margin_bottom = 160.0
 custom_constants/margin_right = 72
@@ -58,12 +63,12 @@ custom_constants/margin_top = 54
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 54
 
-[node name="BoxLeft" type="Control" parent="Tabs/Metronome/IncrementRow/TimeSig"]
+[node name="BoxLeft" type="Control" parent="Tabs/METRONOME/IncrementRow/TimeSig"]
 margin_top = 54.0
 margin_right = 216.0
 margin_bottom = 106.0
 
-[node name="SigButton" type="Button" parent="Tabs/Metronome/IncrementRow/TimeSig/BoxLeft"]
+[node name="SigButton" type="Button" parent="Tabs/METRONOME/IncrementRow/TimeSig/BoxLeft"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -74,7 +79,7 @@ margin_bottom = 27.0
 rect_pivot_offset = Vector2( 35, 27 )
 text = "4/4"
 
-[node name="Ticks" type="MarginContainer" parent="Tabs/Metronome/IncrementRow"]
+[node name="Ticks" type="MarginContainer" parent="Tabs/METRONOME/IncrementRow"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -288.0
@@ -85,13 +90,13 @@ custom_constants/margin_top = 54
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 54
 
-[node name="TickContainer" type="Control" parent="Tabs/Metronome/IncrementRow/Ticks"]
+[node name="TickContainer" type="Control" parent="Tabs/METRONOME/IncrementRow/Ticks"]
 margin_left = 20.0
 margin_top = 54.0
 margin_right = 194.0
 margin_bottom = 106.0
 
-[node name="MinusButton" type="Button" parent="Tabs/Metronome/IncrementRow/Ticks/TickContainer"]
+[node name="MinusButton" type="Button" parent="Tabs/METRONOME/IncrementRow/Ticks/TickContainer"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_top = -20.0
@@ -100,7 +105,7 @@ margin_bottom = 20.0
 rect_pivot_offset = Vector2( 25.4536, 30.4752 )
 text = "-"
 
-[node name="PlusButton" type="Button" parent="Tabs/Metronome/IncrementRow/Ticks/TickContainer"]
+[node name="PlusButton" type="Button" parent="Tabs/METRONOME/IncrementRow/Ticks/TickContainer"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -113,7 +118,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "+"
 
-[node name="Subdiv" type="Button" parent="Tabs/Metronome/IncrementRow/Ticks/TickContainer"]
+[node name="Subdiv" type="Button" parent="Tabs/METRONOME/IncrementRow/Ticks/TickContainer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -124,19 +129,19 @@ margin_right = 35.0
 margin_bottom = 27.0
 text = "0"
 
-[node name="PlayModes" type="MarginContainer" parent="Tabs/Metronome"]
+[node name="PlayModes" type="MarginContainer" parent="Tabs/METRONOME"]
 anchor_right = 1.0
 margin_top = 270.0
 margin_bottom = 356.0
 custom_constants/margin_right = 146
 custom_constants/margin_left = 146
 
-[node name="Control" type="Control" parent="Tabs/Metronome/PlayModes"]
+[node name="Control" type="Control" parent="Tabs/METRONOME/PlayModes"]
 margin_left = 146.0
-margin_right = 422.0
+margin_right = 410.0
 margin_bottom = 86.0
 
-[node name="PlayButton" type="Button" parent="Tabs/Metronome/PlayModes/Control"]
+[node name="PlayButton" type="Button" parent="Tabs/METRONOME/PlayModes/Control"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_top = -43.0
@@ -144,7 +149,7 @@ margin_right = 130.0
 margin_bottom = 43.0
 text = "Play"
 
-[node name="TapButton" type="Button" parent="Tabs/Metronome/PlayModes/Control"]
+[node name="TapButton" type="Button" parent="Tabs/METRONOME/PlayModes/Control"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -154,55 +159,49 @@ margin_top = -43.0
 margin_bottom = 43.0
 text = "Tap"
 
-[node name="MetroDial" type="Control" parent="Tabs/Metronome"]
+[node name="MetroDial" type="Control" parent="Tabs/METRONOME"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 356.0
 
-[node name="ColorRect" type="ColorRect" parent="Tabs/Metronome/MetroDial"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color( 0.207843, 0.207843, 0.207843, 1 )
-
-[node name="Record" type="Tabs" parent="Tabs"]
+[node name="RECORD" type="Tabs" parent="Tabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-script = ExtResource( 2 )
+margin_left = 10.0
+margin_top = 71.0
+margin_right = -10.0
+script = ExtResource( 3 )
 
-[node name="HeaderTimer" type="Control" parent="Tabs/Record"]
+[node name="HeaderTimer" type="Control" parent="Tabs/RECORD"]
 anchor_right = 1.0
 margin_bottom = 500.0
 
-[node name="ColorRect" type="ColorRect" parent="Tabs/Record/HeaderTimer"]
+[node name="ColorRect" type="ColorRect" parent="Tabs/RECORD/HeaderTimer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.12549, 0.12549, 0.12549, 1 )
+color = Color( 0.14902, 0.14902, 0.14902, 1 )
 
-[node name="Timer" type="Label" parent="Tabs/Record/HeaderTimer"]
+[node name="Timer" type="Label" parent="Tabs/RECORD/HeaderTimer"]
+anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 192.0
-margin_top = 42.0278
-margin_right = -46.0
-margin_bottom = 56.0278
-rect_scale = Vector2( 4, 4 )
+margin_left = -93.5
+margin_top = 30.0
+margin_right = 93.5
+margin_bottom = 79.0
+rect_pivot_offset = Vector2( 93.5, 39.5 )
+custom_fonts/font = SubResource( 1 )
 text = "00:00"
 align = 1
 
-[node name="Lower" type="Control" parent="Tabs/Record"]
+[node name="Lower" type="Control" parent="Tabs/RECORD"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_top = 32.0
 margin_bottom = 474.0
 
-[node name="RecordButton" type="TextureButton" parent="Tabs/Record/Lower"]
+[node name="RecordButton" type="TextureButton" parent="Tabs/RECORD/Lower"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -211,7 +210,7 @@ margin_left = -32.0
 margin_top = -32.0
 margin_right = 32.0
 margin_bottom = 32.0
-texture_normal = ExtResource( 3 )
+texture_normal = ExtResource( 5 )
 
 [node name="HeaderBar" type="Control" parent="."]
 anchor_left = 0.5
@@ -228,9 +227,10 @@ margin_bottom = 60.0
 modulate = Color( 0, 0, 0, 1 )
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -7.0
-margin_right = 53.0
-margin_bottom = 7.0
+margin_left = 20.0
+margin_top = -15.5
+margin_right = 107.0
+margin_bottom = 15.5
 text = "TunaCan"
 align = 1
 valign = 1
@@ -240,9 +240,11 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -63.0
-margin_top = -10.0
-margin_bottom = 10.0
+margin_left = -160.0
+margin_top = -15.0
+margin_right = -20.0
+margin_bottom = 15.0
+rect_pivot_offset = Vector2( 309.508, 439.459 )
 text = "Settings"
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
@@ -250,7 +252,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 50.0
 
-[connection signal="pressed" from="Tabs/Metronome/IncrementRow/Ticks/TickContainer/MinusButton" to="Tabs/Metronome" method="_on_MinusButton_pressed"]
-[connection signal="pressed" from="Tabs/Metronome/IncrementRow/Ticks/TickContainer/PlusButton" to="Tabs/Metronome" method="_on_Plus_pressed"]
-[connection signal="pressed" from="Tabs/Record/Lower/RecordButton" to="Tabs/Record" method="_on_RecordButton_pressed"]
-[connection signal="toggled" from="Tabs/Record/Lower/RecordButton" to="Tabs/Record" method="_on_TextureButton_toggled"]
+[connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/MinusButton" to="Tabs/METRONOME" method="_on_MinusButton_pressed"]
+[connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/PlusButton" to="Tabs/METRONOME" method="_on_Plus_pressed"]
+[connection signal="pressed" from="Tabs/RECORD/Lower/RecordButton" to="Tabs/RECORD" method="_on_RecordButton_pressed"]
+[connection signal="toggled" from="Tabs/RECORD/Lower/RecordButton" to="Tabs/RECORD" method="_on_TextureButton_toggled"]
