@@ -189,6 +189,7 @@ anchor_bottom = 1.0
 margin_top = 356.0
 
 [node name="RECORD" type="Tabs" parent="Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -215,6 +216,18 @@ margin_bottom = 79.0
 rect_pivot_offset = Vector2( 93.5, 39.5 )
 custom_fonts/font = SubResource( 1 )
 text = "00:00"
+
+[node name="PlaybackButton" type="Button" parent="Tabs/RECORD/HeaderTimer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -65.0
+margin_top = -120.0
+margin_right = 65.0
+margin_bottom = -34.0
+rect_pivot_offset = Vector2( 65, 43 )
+text = "Playback"
 
 [node name="Lower" type="Control" parent="Tabs/RECORD"]
 anchor_top = 0.5
@@ -269,8 +282,8 @@ anchor_bottom = 0.5
 margin_left = -160.0
 margin_top = -15.0
 margin_right = -20.0
-margin_bottom = 15.0
-rect_pivot_offset = Vector2( 309.508, 439.459 )
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 138.522, 1.43547 )
 text = "Settings"
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
