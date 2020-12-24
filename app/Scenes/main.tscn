@@ -1,15 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Graphics/SnazzyOrange.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Metronome.gd" type="Script" id=2]
-[ext_resource path="res://Scripts/Record.gd" type="Script" id=3]
-[ext_resource path="res://Graphics/Montserrat-Medium.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://icon.png" type="Texture" id=5]
+[ext_resource path="res://Graphics/ButtonDarkTheme.tres" type="Theme" id=3]
+[ext_resource path="res://Graphics/ButtonLightTheme.tres" type="Theme" id=4]
+[ext_resource path="res://Scripts/Record.gd" type="Script" id=5]
+[ext_resource path="res://Graphics/Montserrat-Medium.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://icon.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
 use_filter = true
-font_data = ExtResource( 4 )
+font_data = ExtResource( 6 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -77,6 +79,7 @@ margin_left = -70.0
 margin_top = -27.0
 margin_bottom = 27.0
 rect_pivot_offset = Vector2( 35, 27 )
+theme = ExtResource( 3 )
 text = "4/4"
 
 [node name="Ticks" type="MarginContainer" parent="Tabs/METRONOME/IncrementRow"]
@@ -103,6 +106,7 @@ margin_top = -20.0
 margin_right = 40.0
 margin_bottom = 20.0
 rect_pivot_offset = Vector2( 25.4536, 30.4752 )
+theme = ExtResource( 4 )
 text = "-"
 
 [node name="PlusButton" type="Button" parent="Tabs/METRONOME/IncrementRow/Ticks/TickContainer"]
@@ -116,6 +120,7 @@ margin_bottom = 20.0
 rect_pivot_offset = Vector2( 20, 20 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme = ExtResource( 4 )
 text = "+"
 
 [node name="Subdiv" type="Button" parent="Tabs/METRONOME/IncrementRow/Ticks/TickContainer"]
@@ -127,6 +132,7 @@ margin_left = -35.0
 margin_top = -27.0
 margin_right = 35.0
 margin_bottom = 27.0
+theme = ExtResource( 3 )
 text = "0"
 
 [node name="PlayModes" type="MarginContainer" parent="Tabs/METRONOME"]
@@ -144,8 +150,9 @@ margin_bottom = 86.0
 [node name="PlayButton" type="Button" parent="Tabs/METRONOME/PlayModes/Control"]
 anchor_top = 0.5
 anchor_bottom = 0.5
+margin_left = -12.0
 margin_top = -43.0
-margin_right = 130.0
+margin_right = 118.0
 margin_bottom = 43.0
 text = "Play"
 
@@ -154,8 +161,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -130.0
+margin_left = -118.0
 margin_top = -43.0
+margin_right = 12.0
 margin_bottom = 43.0
 text = "Tap"
 
@@ -171,7 +179,7 @@ anchor_bottom = 1.0
 margin_left = 10.0
 margin_top = 71.0
 margin_right = -10.0
-script = ExtResource( 3 )
+script = ExtResource( 5 )
 
 [node name="HeaderTimer" type="Control" parent="Tabs/RECORD"]
 anchor_right = 1.0
@@ -210,7 +218,7 @@ margin_left = -32.0
 margin_top = -32.0
 margin_right = 32.0
 margin_bottom = 32.0
-texture_normal = ExtResource( 5 )
+texture_normal = ExtResource( 7 )
 
 [node name="HeaderBar" type="Control" parent="."]
 anchor_left = 0.5
