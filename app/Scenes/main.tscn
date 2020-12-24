@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Graphics/SnazzyOrange.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Metronome.gd" type="Script" id=2]
@@ -6,12 +6,26 @@
 [ext_resource path="res://Graphics/ButtonLightTheme.tres" type="Theme" id=4]
 [ext_resource path="res://Scripts/Record.gd" type="Script" id=5]
 [ext_resource path="res://Graphics/Montserrat-Medium.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://icon.png" type="Texture" id=7]
+[ext_resource path="res://Graphics/Textures/Ellipse.png" type="Texture" id=7]
+[ext_resource path="res://Graphics/Textures/RecordPressed.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
 use_filter = true
 font_data = ExtResource( 6 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "recording",
+"speed": 5.0
+} ]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -36,6 +50,8 @@ margin_top = 71.0
 margin_right = -10.0
 
 [node name="METRONOME" type="Tabs" parent="Tabs"]
+editor/display_folded = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -173,7 +189,6 @@ anchor_bottom = 1.0
 margin_top = 356.0
 
 [node name="RECORD" type="Tabs" parent="Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -200,7 +215,6 @@ margin_bottom = 79.0
 rect_pivot_offset = Vector2( 93.5, 39.5 )
 custom_fonts/font = SubResource( 1 )
 text = "00:00"
-align = 1
 
 [node name="Lower" type="Control" parent="Tabs/RECORD"]
 anchor_top = 0.5
@@ -214,11 +228,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -32.0
-margin_top = -32.0
-margin_right = 32.0
-margin_bottom = 32.0
-texture_normal = ExtResource( 7 )
+margin_left = -81.0
+margin_top = -80.0
+margin_right = 81.0
+margin_bottom = 80.0
+rect_pivot_offset = Vector2( 80, 80 )
+
+[node name="ButtonSprite" type="AnimatedSprite" parent="Tabs/RECORD/Lower/RecordButton"]
+position = Vector2( 80, 80 )
+frames = SubResource( 2 )
 
 [node name="HeaderBar" type="Control" parent="."]
 anchor_left = 0.5
