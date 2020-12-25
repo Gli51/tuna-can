@@ -72,5 +72,6 @@ scale = Vector2( 2, 2 )
 texture = SubResource( 3 )
 texture_scale = Vector2( 4, 4 )
 script = ExtResource( 3 )
+
 [connection signal="input_event" from="Tabs/Metronome/Area2D" to="Tabs/Metronome/Area2D" method="_on_Area2D_input_event"]
 [connection signal="draw" from="Tabs/Metronome/Area2D/Polygon2D" to="Tabs/Metronome/Area2D" method="_on_Polygon2D_draw"]
