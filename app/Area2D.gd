@@ -8,7 +8,7 @@ const MIN_TEMPO = 30
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$CollisionShape2D/Label.text = str(tempo)
+	$NumberTempo.text = str(tempo)
 	start_pos = get_position_in_parent()
 	set_process(false)
 	
@@ -37,7 +37,7 @@ func _process(delta):
 	
 	# whole is 220. 220 * angle/2pi
 	tempo = round(MIN_TEMPO + (MAX_TEMPO - MIN_TEMPO) * (angle /(2*PI)))
-	$CollisionShape2D/Label.text = str(tempo)
+	$NumberTempo.text = str(tempo)
 	
 	update()
 	
@@ -66,8 +66,8 @@ func rotate_tempo(tempo, rad):
 		ntempo = MIN_TEMPO + (MAX_TEMPO - ntempo)
 	return ntempo
 	
-func _draw():
-	var radius = $CollisionShape2D.shape.radius
-	draw_circle(Vector2(0,0), radius, Color.gray)
-	# use angle to draw a line at that angle with length _ at position xcosangle,ycosangle
+#func _draw():
+#	var radius = $CollisionShape2D.shape.radius
+#	draw_circle(Vector2(0,0), radius, Color.gray)
+#	# use angle to draw a line at that angle with length _ at position xcosangle,ycosangle
 	
