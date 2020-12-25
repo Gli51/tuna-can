@@ -69,5 +69,5 @@ func rotate_tempo(tempo, rad):
 func _draw():
 	var radius = $CollisionShape2D.shape.radius
 	draw_circle(Vector2(0,0), radius, Color.gray)
-	# use angle to draw a line at that angle with length _ at position xcosangle,ycosangle
+	# draw a line at point (r,0), rotate it at the angle
 	
