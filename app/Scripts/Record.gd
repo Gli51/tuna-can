@@ -11,12 +11,12 @@ func _ready():
 func _process(delta):
 	if recording == true:
 		elapsed += delta
-		_increment_timer()
+		increment_timer()
 	else:
 		elapsed = 0
 		
 
-func _increment_timer():
+func increment_timer():
 	"""Called from _process(delta) when recording has started. Increments the minutes and seconds on the timer label."""
 	var seconds = int(elapsed) % 60
 	var minutes = int(elapsed) / 60
@@ -28,7 +28,7 @@ func _on_TextureButton_toggled(button_pressed):
 	"""When recording button is toggled, enables/disables playback button and starts or stops timer."""
 	if button_pressed == true:
 		str_elapsed = "00 : 00"
-		_increment_timer()
+		increment_timer()
 		#toggles recording button appearance
 		$Lower/RecordButton/ButtonSprite.animation =  "recording"
 		#stop any playback that's happening + clear the temp cache
@@ -55,7 +55,7 @@ func _on_RecordButton_pressed():
 #function timeout
 #after 60 minutes passes, stop recording
 #also stop recording once file surpasses available phone memory
-func _timeout():
+func timeout():
 	pass
 	#if minutes >= 60:
 		#_on_TextureButton_toggled(false)
