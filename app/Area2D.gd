@@ -1,6 +1,5 @@
 extends Area2D
 
-var start_pos = Vector2()
 var curr_pos
 var tempo = 30
 const MAX_TEMPO = 230
@@ -8,25 +7,23 @@ const MIN_TEMPO = 30
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$CollisionShape2D/Label.text = str(tempo)
-	start_pos = get_position_in_parent()
+	$NumberTempo.text = str(tempo)
 	set_process(false)
 	
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("click"):
 		set_process(true)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	curr_pos = get_local_mouse_position() #Get the mouse position relative to this item's position (center of circle).
 	# upper half - neg y, lower half, pos y. left neg x, right pos x
 	#    - - | + -
 	#   -----|-----
 	#    - + | + +
-	
 	var x = curr_pos.x
 	var y = curr_pos.y
 	var angle = fullrad(curr_pos.angle())
+	$DialContainer/DialHand.set_rotation(angle)
 	
 	# note: since coordinates are upside down, increasing tempo is clockwise.
 	# May want to rotate x axis later
@@ -37,7 +34,8 @@ func _process(delta):
 	
 	# whole is 220. 220 * angle/2pi
 	tempo = round(MIN_TEMPO + (MAX_TEMPO - MIN_TEMPO) * (angle /(2*PI)))
-	$CollisionShape2D/Label.text = str(tempo)
+	$NumberTempo.text = str(tempo)
+	center_number()
 	
 	update()
 	
@@ -66,8 +64,10 @@ func rotate_tempo(tempo, rad):
 		ntempo = MIN_TEMPO + (MAX_TEMPO - ntempo)
 	return ntempo
 	
-func _draw():
-	var radius = $CollisionShape2D.shape.radius
-	draw_circle(Vector2(0,0), radius, Color.gray)
-	# draw a line at point (r,0), rotate it at the angle
+#func _draw():
+#	var radius = $CollisionShape2D.shape.radius
+#	draw_circle(Vector2(0,0), radius, Color.gray)
+#	# use angle to draw a line at that angle with length _ at position xcosangle,ycosangle
 	
+func center_number():
+	$NumberTempo.set_pivot_offset($NumberTempo.rect_size / 2)

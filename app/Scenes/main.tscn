@@ -1,27 +1,28 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Graphics/SnazzyOrange.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Metronome.gd" type="Script" id=2]
 [ext_resource path="res://Graphics/ButtonDarkTheme.tres" type="Theme" id=3]
 [ext_resource path="res://Graphics/ButtonLightTheme.tres" type="Theme" id=4]
-[ext_resource path="res://Scripts/Record.gd" type="Script" id=5]
-[ext_resource path="res://Graphics/Montserrat-Medium.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Graphics/Textures/Ellipse.png" type="Texture" id=7]
-[ext_resource path="res://Graphics/Textures/RecordPressed.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Dial.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/Record.gd" type="Script" id=6]
+[ext_resource path="res://Graphics/Montserrat-Medium.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Graphics/Textures/Ellipse.png" type="Texture" id=8]
+[ext_resource path="res://Graphics/Textures/RecordPressed.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
 use_filter = true
-font_data = ExtResource( 6 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "recording",
 "speed": 5.0
@@ -50,7 +51,6 @@ margin_top = 71.0
 margin_right = -10.0
 
 [node name="METRONOME" type="Tabs" parent="Tabs"]
-editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -188,13 +188,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 356.0
 
+[node name="DialNode" parent="Tabs/METRONOME/MetroDial" instance=ExtResource( 5 )]
+
 [node name="RECORD" type="Tabs" parent="Tabs"]
+editor/display_folded = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
 margin_top = 71.0
 margin_right = -10.0
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="HeaderTimer" type="Control" parent="Tabs/RECORD"]
 anchor_right = 1.0
@@ -215,6 +219,18 @@ margin_bottom = 79.0
 rect_pivot_offset = Vector2( 93.5, 39.5 )
 custom_fonts/font = SubResource( 1 )
 text = "00:00"
+
+[node name="PlaybackButton" type="Button" parent="Tabs/RECORD/HeaderTimer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -65.0
+margin_top = -120.0
+margin_right = 65.0
+margin_bottom = -34.0
+rect_pivot_offset = Vector2( 65, 43 )
+text = "Playback"
 
 [node name="Lower" type="Control" parent="Tabs/RECORD"]
 anchor_top = 0.5
@@ -269,8 +285,8 @@ anchor_bottom = 0.5
 margin_left = -160.0
 margin_top = -15.0
 margin_right = -20.0
-margin_bottom = 15.0
-rect_pivot_offset = Vector2( 309.508, 439.459 )
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 138.522, 1.43547 )
 text = "Settings"
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
