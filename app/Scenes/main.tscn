@@ -1,28 +1,29 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Graphics/SnazzyOrange.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Metronome.gd" type="Script" id=2]
 [ext_resource path="res://Graphics/ButtonDarkTheme.tres" type="Theme" id=3]
 [ext_resource path="res://Graphics/ButtonLightTheme.tres" type="Theme" id=4]
 [ext_resource path="res://Scenes/Dial.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scripts/Record.gd" type="Script" id=6]
-[ext_resource path="res://Graphics/Montserrat-Medium.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://Graphics/Textures/Ellipse.png" type="Texture" id=8]
-[ext_resource path="res://Graphics/Textures/RecordPressed.png" type="Texture" id=9]
+[ext_resource path="res://Recording.wav" type="AudioStream" id=6]
+[ext_resource path="res://Scripts/Record.gd" type="Script" id=7]
+[ext_resource path="res://Graphics/Montserrat-Medium.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Graphics/Textures/Ellipse.png" type="Texture" id=9]
+[ext_resource path="res://Graphics/Textures/RecordPressed.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
 use_filter = true
-font_data = ExtResource( 7 )
+font_data = ExtResource( 8 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ) ],
+"frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "recording",
 "speed": 5.0
@@ -56,6 +57,7 @@ anchor_bottom = 1.0
 margin_left = 10.0
 margin_top = 71.0
 margin_right = -10.0
+mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="MetroVizualizer" type="Control" parent="Tabs/METRONOME"]
@@ -117,9 +119,9 @@ margin_bottom = 106.0
 [node name="MinusButton" type="Button" parent="Tabs/METRONOME/IncrementRow/Ticks/TickContainer"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -26.0
-margin_right = 50.0
-margin_bottom = 24.0
+margin_top = -20.0
+margin_right = 40.0
+margin_bottom = 20.0
 rect_pivot_offset = Vector2( 25.4536, 30.4752 )
 theme = ExtResource( 4 )
 text = "-"
@@ -129,10 +131,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -30.0
-margin_top = -26.0
-margin_right = 20.0
-margin_bottom = 24.0
+margin_left = -40.0
+margin_top = -20.0
+margin_bottom = 20.0
 rect_pivot_offset = Vector2( 20, 20 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -144,22 +145,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -25.0
+margin_left = -35.0
 margin_top = -27.0
-margin_right = 45.0
+margin_right = 35.0
 margin_bottom = 27.0
 theme = ExtResource( 3 )
 text = "0"
-
-[node name="DialNode" parent="Tabs/METRONOME" instance=ExtResource( 5 )]
-margin_top = 160.508
-margin_bottom = 160.508
-
-[node name="MetroDial" type="Control" parent="Tabs/METRONOME"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 393.0
 
 [node name="PlayModes" type="MarginContainer" parent="Tabs/METRONOME"]
 anchor_right = 1.0
@@ -193,6 +184,18 @@ margin_right = 12.0
 margin_bottom = 43.0
 text = "Tap"
 
+[node name="MetroDial" type="Control" parent="Tabs/METRONOME"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 356.0
+
+[node name="DialNode" parent="Tabs/METRONOME/MetroDial" instance=ExtResource( 5 )]
+mouse_filter = 2
+
+[node name="Beats" type="AudioStreamPlayer" parent="Tabs/METRONOME"]
+stream = ExtResource( 6 )
+volume_db = 6.0
+
 [node name="RECORD" type="Tabs" parent="Tabs"]
 editor/display_folded = true
 visible = false
@@ -201,7 +204,7 @@ anchor_bottom = 1.0
 margin_left = 10.0
 margin_top = 71.0
 margin_right = -10.0
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="HeaderTimer" type="Control" parent="Tabs/RECORD"]
 anchor_right = 1.0
@@ -258,7 +261,6 @@ position = Vector2( 80, 80 )
 frames = SubResource( 2 )
 
 [node name="HeaderBar" type="Control" parent="."]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -288.0
@@ -293,7 +295,12 @@ margin_bottom = 22.0
 rect_pivot_offset = Vector2( 138.522, 1.43547 )
 text = "Settings"
 
+[node name="PopupMenu" type="PopupMenu" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 50.0
 [connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/MinusButton" to="Tabs/METRONOME" method="_on_MinusButton_pressed"]
 [connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/PlusButton" to="Tabs/METRONOME" method="_on_Plus_pressed"]
+[connection signal="button_down" from="Tabs/METRONOME/PlayModes/Control/PlayButton" to="Tabs/METRONOME" method="_on_PlayButton_button_down"]
 [connection signal="pressed" from="Tabs/RECORD/Lower/RecordButton" to="Tabs/RECORD" method="_on_RecordButton_pressed"]
 [connection signal="toggled" from="Tabs/RECORD/Lower/RecordButton" to="Tabs/RECORD" method="_on_TextureButton_toggled"]
