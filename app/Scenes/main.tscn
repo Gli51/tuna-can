@@ -51,7 +51,6 @@ margin_top = 71.0
 margin_right = -10.0
 
 [node name="METRONOME" type="Tabs" parent="Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -118,9 +117,9 @@ margin_bottom = 106.0
 [node name="MinusButton" type="Button" parent="Tabs/METRONOME/IncrementRow/Ticks/TickContainer"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -20.0
-margin_right = 40.0
-margin_bottom = 20.0
+margin_top = -26.0
+margin_right = 50.0
+margin_bottom = 24.0
 rect_pivot_offset = Vector2( 25.4536, 30.4752 )
 theme = ExtResource( 4 )
 text = "-"
@@ -130,9 +129,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -40.0
-margin_top = -20.0
-margin_bottom = 20.0
+margin_left = -30.0
+margin_top = -26.0
+margin_right = 20.0
+margin_bottom = 24.0
 rect_pivot_offset = Vector2( 20, 20 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -144,12 +144,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -35.0
+margin_left = -25.0
 margin_top = -27.0
-margin_right = 35.0
+margin_right = 45.0
 margin_bottom = 27.0
 theme = ExtResource( 3 )
 text = "0"
+
+[node name="DialNode" parent="Tabs/METRONOME" instance=ExtResource( 5 )]
+margin_top = 160.508
+margin_bottom = 160.508
+
+[node name="MetroDial" type="Control" parent="Tabs/METRONOME"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 393.0
 
 [node name="PlayModes" type="MarginContainer" parent="Tabs/METRONOME"]
 anchor_right = 1.0
@@ -182,13 +192,6 @@ margin_top = -43.0
 margin_right = 12.0
 margin_bottom = 43.0
 text = "Tap"
-
-[node name="MetroDial" type="Control" parent="Tabs/METRONOME"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 356.0
-
-[node name="DialNode" parent="Tabs/METRONOME/MetroDial" instance=ExtResource( 5 )]
 
 [node name="RECORD" type="Tabs" parent="Tabs"]
 editor/display_folded = true
@@ -255,6 +258,7 @@ position = Vector2( 80, 80 )
 frames = SubResource( 2 )
 
 [node name="HeaderBar" type="Control" parent="."]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -288.0
@@ -288,11 +292,6 @@ margin_right = -20.0
 margin_bottom = 22.0
 rect_pivot_offset = Vector2( 138.522, 1.43547 )
 text = "Settings"
-
-[node name="PopupMenu" type="PopupMenu" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 50.0
 
 [connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/MinusButton" to="Tabs/METRONOME" method="_on_MinusButton_pressed"]
 [connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/PlusButton" to="Tabs/METRONOME" method="_on_Plus_pressed"]
