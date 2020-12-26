@@ -36,7 +36,6 @@ func _process(delta):
 	tempo = round(MIN_TEMPO + (MAX_TEMPO - MIN_TEMPO) * (angle /(2*PI)))
 	$NumberTempo.text = str(tempo)
 	center_number()
-	
 	update()
 	
 	# will probs want to save tempo from last open (add later)
