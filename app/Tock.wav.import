@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Recording.wav-51df6e6e6ba3428601ce98ece2a7de64.sample"
+path="res://.import/Tock.wav-69560dc7c9cc9612391ab1e18cad0451.sample"
 
 [deps]
 
-source_file="res://Recording.wav"
-dest_files=[ "res://.import/Recording.wav-51df6e6e6ba3428601ce98ece2a7de64.sample" ]
+source_file="res://Tock.wav"
+dest_files=[ "res://.import/Tock.wav-69560dc7c9cc9612391ab1e18cad0451.sample" ]
 
 [params]
 
