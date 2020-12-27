@@ -8,22 +8,21 @@ var time
 var beat_timer
 signal flash
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	#Initializes beat timer and time variable as an additional parameter for signaling flash
 	beat_timer = Timer.new()
 	add_child(beat_timer)
 	beat_timer.autostart = false
-	beat_timer.wait_time = time_from_tempo($DialNode.tempo, subdivisions)
+	time = time_from_tempo($DialNode.tempo, subdivisions)
+	beat_timer.wait_time = time
 	beat_timer.connect("timeout", self, "_timeout")
 	
 	#subtimer - 60/tempo/subdivisions
 
 func _process(delta):
 	if playing:
-		# problem: waits until finished playing current sound to play next sound?
-		# nope, its because time < 0
 		time = time_from_tempo($DialNode.tempo, subdivisions)
-		print(str(time))
+		#print(str(time))
 		beat_timer.wait_time = time
 
 
@@ -44,14 +43,21 @@ func _on_Plus_pressed():
 func _on_PlayButton_button_down():
 	playing = not playing
 	if playing:
+		#plays immediately then starts timer for consecutive beats+flashes
+		$Beats.play()
+		emit_signal("flash", time)
 		beat_timer.start()
 	else:
 		beat_timer.stop()
 		$Beats.stop()
+		
 #may need to adjust the speed at which the beat plays also?
+
 func _timeout():
 	"""Whenever timer times out, plays beat and emits signal for screen flash."""
 	$Beats.play()
 	emit_signal("flash", time)
+	
 func time_from_tempo(tempo, subs):
+	""" Changes BPM to seconds per beat """
 	return 60.0 / tempo / (subs + 1)
