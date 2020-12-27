@@ -9,10 +9,9 @@ func _ready():
 	$Tabs/METRONOME.connect("flash", self, "flash_on_beat")
 
 func spawn_flash():
-	var screen_flash = load("res://Scenes/ScreenFlash.tscn")
+	var screen_flash = preload("res://Scenes/ScreenFlash.tscn")
 	flash_instance = screen_flash.instance()
 	add_child(flash_instance)
-	#flash_instance.visible = false
 	
 func flash_on_beat(time):
 	flash_instance.flash(time)
