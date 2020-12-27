@@ -55,7 +55,7 @@ func _on_RecordButton_pressed():
 #function timeout
 #after 60 minutes passes, stop recording
 #also stop recording once file surpasses available phone memory
-func timeout():
+func time_out():
 	pass
 	#if minutes >= 60:
 		#_on_TextureButton_toggled(false)

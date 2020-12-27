@@ -4,7 +4,9 @@ var subdivisions = 0
 var subdivCap = 10 #This is the maximum number of subdivisions per beat
 
 var playing = false
+var time
 var beat_timer
+signal flash
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,7 +22,7 @@ func _process(delta):
 	if playing:
 		# problem: waits until finished playing current sound to play next sound?
 		# nope, its because time < 0
-		var time = time_from_tempo($DialNode.tempo, subdivisions)
+		time = time_from_tempo($DialNode.tempo, subdivisions)
 		print(str(time))
 		beat_timer.wait_time = time
 
@@ -48,7 +50,8 @@ func _on_PlayButton_button_down():
 		$Beats.stop()
 #may need to adjust the speed at which the beat plays also?
 func _timeout():
+	"""Whenever timer times out, plays beat and emits signal for screen flash."""
 	$Beats.play()
-	
+	emit_signal("flash", time)
 func time_from_tempo(tempo, subs):
 	return 60.0 / tempo / (subs + 1)
