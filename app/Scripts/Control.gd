@@ -1,4 +1,4 @@
-extends Area2D
+extends Control
 
 var curr_pos
 var tempo = 30
@@ -9,10 +9,6 @@ const MIN_TEMPO = 30
 func _ready():
 	$NumberTempo.text = str(tempo)
 	set_process(false)
-	
-func _on_Area2D_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("click"):
-		set_process(true)
 
 func _process(delta):
 	curr_pos = get_local_mouse_position() #Get the mouse position relative to this item's position (center of circle).
@@ -23,7 +19,7 @@ func _process(delta):
 	var x = curr_pos.x
 	var y = curr_pos.y
 	var angle = fullrad(curr_pos.angle())
-	$DialContainer/DialHand.set_rotation(angle)
+	$DialHand.set_rotation(angle)
 	
 	# note: since coordinates are upside down, increasing tempo is clockwise.
 	# May want to rotate x axis later
@@ -70,3 +66,7 @@ func rotate_tempo(tempo, rad):
 	
 func center_number():
 	$NumberTempo.set_pivot_offset($NumberTempo.rect_size / 2)
+
+func _on_DialOuter_gui_input(event):
+	if event.is_action_pressed("click"):
+		set_process(true)

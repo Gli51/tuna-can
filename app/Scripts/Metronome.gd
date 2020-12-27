@@ -11,7 +11,7 @@ func _ready():
 	beat_timer = Timer.new()
 	add_child(beat_timer)
 	beat_timer.autostart = false
-	beat_timer.wait_time = time_from_tempo($DialNode/DialDisplay.tempo, subdivisions)
+	beat_timer.wait_time = time_from_tempo($DialNode.tempo, subdivisions)
 	beat_timer.connect("timeout", self, "_timeout")
 	
 	#subtimer - 60/tempo/subdivisions
@@ -20,7 +20,7 @@ func _process(delta):
 	if playing:
 		# problem: waits until finished playing current sound to play next sound?
 		# nope, its because time < 0
-		var time = time_from_tempo($DialNode/DialDisplay.tempo, subdivisions)
+		var time = time_from_tempo($DialNode.tempo, subdivisions)
 		print(str(time))
 		beat_timer.wait_time = time
 
