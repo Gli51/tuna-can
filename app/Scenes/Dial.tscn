@@ -45,6 +45,7 @@ texture = ExtResource( 3 )
 margin_top = -5.0
 margin_right = 150.0
 margin_bottom = 5.0
+mouse_filter = 2
 texture = ExtResource( 4 )
 
 [node name="DialCenter2" type="ColorRect" parent="."]
