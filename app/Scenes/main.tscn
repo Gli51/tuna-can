@@ -60,11 +60,11 @@ margin_top = 71.0
 margin_right = -10.0
 script = ExtResource( 2 )
 
-[node name="MetroVizualizer" type="Control" parent="Tabs/METRONOME"]
+[node name="MetroVisualizer" type="Control" parent="Tabs/METRONOME"]
 anchor_right = 1.0
 margin_bottom = 110.0
 
-[node name="ColorRect" type="ColorRect" parent="Tabs/METRONOME/MetroVizualizer"]
+[node name="ColorRect" type="ColorRect" parent="Tabs/METRONOME/MetroVisualizer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.14902, 0.14902, 0.14902, 1 )
