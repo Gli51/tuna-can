@@ -30,11 +30,21 @@ func _process(delta):
 	tempo = round(MIN_TEMPO + (MAX_TEMPO - MIN_TEMPO) * (angle /(2*PI)))
 	$NumberTempo.text = str(tempo)
 	center_number()
-	update()
+	#update()
 	
 	# will probs want to save tempo from last open (add later)
 	if Input.is_action_just_released("click"):
 		set_process(false)
+		
+#func set_dial_from_angle(angle):
+
+func set_dial_from_tempo(tempo):
+	#sets tempo, text, and dialhand
+	tempo = tempo
+	$NumberTempo.text = str(tempo)
+	var angle = (tempo / (MAX_TEMPO - MIN_TEMPO)) * 2 * PI
+	$DialHand.set_rotation(angle)
+	
 
 func fullrad(rad):
 	if rad < 0:

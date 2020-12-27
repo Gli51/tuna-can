@@ -301,5 +301,6 @@ margin_top = 50.0
 [connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/MinusButton" to="Tabs/METRONOME" method="_on_MinusButton_pressed"]
 [connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/PlusButton" to="Tabs/METRONOME" method="_on_Plus_pressed"]
 [connection signal="button_down" from="Tabs/METRONOME/PlayModes/Control/PlayButton" to="Tabs/METRONOME" method="_on_PlayButton_button_down"]
+[connection signal="button_down" from="Tabs/METRONOME/PlayModes/Control/TapButton" to="Tabs/METRONOME" method="_on_TapButton_button_down"]
 [connection signal="pressed" from="Tabs/RECORD/Lower/RecordButton" to="Tabs/RECORD" method="_on_RecordButton_pressed"]
 [connection signal="toggled" from="Tabs/RECORD/Lower/RecordButton" to="Tabs/RECORD" method="_on_TextureButton_toggled"]
