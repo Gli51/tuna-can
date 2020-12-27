@@ -17,7 +17,7 @@ func _process(delta):
 		elapsed = 0
 
 func flash_test():
-	"""Uses tween to flash the opacity of WhiteRect corresponding to the seconds per beat."""
+	"""Test function. Uses tween to flash the opacity of WhiteRect."""
 	tween.interpolate_property($WhiteRect, "modulate:a",
 		0.7, 0.0, .5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
