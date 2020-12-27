@@ -298,6 +298,7 @@ text = "Settings"
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 50.0
+
 [connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/MinusButton" to="Tabs/METRONOME" method="_on_MinusButton_pressed"]
 [connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/PlusButton" to="Tabs/METRONOME" method="_on_Plus_pressed"]
 [connection signal="button_down" from="Tabs/METRONOME/PlayModes/Control/PlayButton" to="Tabs/METRONOME" method="_on_PlayButton_button_down"]
