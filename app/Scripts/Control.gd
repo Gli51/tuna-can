@@ -5,7 +5,6 @@ var tempo = 30
 const MAX_TEMPO = 230
 const MIN_TEMPO = 30
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$NumberTempo.text = str(tempo)
 	set_process(false)
@@ -28,7 +27,6 @@ func _process(delta):
 	#$Label.text = str(x) + ", " + str(y) + "\n" + str(angle) + "\n" + str(rad2deg(angle))
 	#angle = rotate_angle(angle, PI/2)
 	
-	# whole is 220. 220 * angle/2pi
 	tempo = round(MIN_TEMPO + (MAX_TEMPO - MIN_TEMPO) * (angle /(2*PI)))
 	$NumberTempo.text = str(tempo)
 	center_number()
