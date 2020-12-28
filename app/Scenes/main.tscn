@@ -56,6 +56,7 @@ margin_top = 71.0
 margin_right = -10.0
 
 [node name="METRONOME" type="Tabs" parent="Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -218,7 +219,6 @@ stream = ExtResource( 9 )
 volume_db = 6.0
 
 [node name="RECORD" type="Tabs" parent="Tabs"]
-editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -248,6 +248,7 @@ custom_fonts/font = SubResource( 1 )
 text = "00:00"
 
 [node name="PlaybackButton" type="Button" parent="Tabs/RECORD/HeaderTimer"]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -257,7 +258,28 @@ margin_top = -120.0
 margin_right = 65.0
 margin_bottom = -34.0
 rect_pivot_offset = Vector2( 65, 43 )
-text = "Playback"
+
+[node name="PlaybackIcon" type="TextureRect" parent="Tabs/RECORD/HeaderTimer/PlaybackButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -19.5
+margin_right = 22.0
+margin_bottom = 19.5
+texture = ExtResource( 6 )
+
+[node name="PlaybackPauseIcon" type="TextureRect" parent="Tabs/RECORD/HeaderTimer/PlaybackButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -17.0
+margin_right = 13.0
+margin_bottom = 17.0
+texture = ExtResource( 7 )
 
 [node name="Lower" type="Control" parent="Tabs/RECORD"]
 anchor_top = 0.5
