@@ -19,6 +19,8 @@ func _ready():
 	time = time_from_tempo($DialNode.tempo, subdivisions)
 	beat_timer.wait_time = time
 	beat_timer.connect("timeout", self, "_timeout")
+	$PlayModes/PlayModeContainer/PlayButton/PlayIcon.visible = true
+	$PlayModes/PlayModeContainer/PlayButton/PauseIcon.visible = false
 	
 	#subtimer - 60/tempo/subdivisions
 
@@ -101,3 +103,13 @@ func _on_TapButton_button_down():
 		beat_timer.wait_time = time
 		var tempo = tempo_from_time(time)
 		$DialNode.tempo = tempo
+
+
+func _on_PlayButton_button_up():
+	"""When play button is released, toggles play/pause icons."""
+	if playing == false:
+		$PlayModes/PlayModeContainer/PlayButton/PlayIcon.visible = true
+		$PlayModes/PlayModeContainer/PlayButton/PauseIcon.visible = false
+	else:
+		$PlayModes/PlayModeContainer/PlayButton/PlayIcon.visible = false
+		$PlayModes/PlayModeContainer/PlayButton/PauseIcon.visible = true
