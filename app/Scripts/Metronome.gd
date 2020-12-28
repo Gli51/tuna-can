@@ -1,7 +1,7 @@
 extends Tabs
 
 var subdivisions = 0
-var subdivCap = 10 #This is the maximum number of subdivisions per beat
+var subdivCap = 8 #This is the maximum number of subdivisions per beat
 
 var playing = false
 var time
@@ -109,7 +109,6 @@ func _on_TapButton_button_down():
 		# check if tempo is within range - if not, sets to nearest valid tempo
 		var max_time = time_from_tempo($DialNode.MIN_TEMPO, 0)
 		var min_time = time_from_tempo($DialNode.MAX_TEMPO, 0)
-<<<<<<< HEAD
 		if time_bw_taps > max_time:
 			time_bw_taps = max_time
 		elif time_bw_taps < min_time:
@@ -119,15 +118,6 @@ func _on_TapButton_button_down():
 		# sets the dial according to tempo
 		$DialNode.set_dial_from_tempo(tempo_from_time(time_bw_taps))
 	#print(taps)
-		
-=======
-		if time > max_time:
-			time = max_time
-		elif time < min_time:
-			time = min_time
-		beat_timer.wait_time = time
-		var tempo = tempo_from_time(time)
-		$DialNode.tempo = tempo
 
 
 func _on_PlayButton_button_up():
@@ -138,4 +128,4 @@ func _on_PlayButton_button_up():
 	else:
 		$PlayModes/PlayModeContainer/PlayButton/PlayIcon.visible = false
 		$PlayModes/PlayModeContainer/PlayButton/PauseIcon.visible = true
->>>>>>> ca921f75a10105d8fedf858cd7481a4190dcd1c9
+
