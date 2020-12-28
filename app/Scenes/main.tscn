@@ -1,30 +1,33 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Graphics/SnazzyOrange.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/main.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Metronome.gd" type="Script" id=3]
 [ext_resource path="res://Graphics/ButtonDarkTheme.tres" type="Theme" id=4]
 [ext_resource path="res://Graphics/ButtonLightTheme.tres" type="Theme" id=5]
-[ext_resource path="res://Scenes/Dial.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Tock2.wav" type="AudioStream" id=7]
-[ext_resource path="res://Scripts/Record.gd" type="Script" id=8]
-[ext_resource path="res://Graphics/Montserrat-Medium.ttf" type="DynamicFontData" id=9]
-[ext_resource path="res://Graphics/Textures/Ellipse.png" type="Texture" id=10]
-[ext_resource path="res://Graphics/Textures/RecordPressed.png" type="Texture" id=11]
+[ext_resource path="res://Graphics/Textures/LineDark.png" type="Texture" id=6]
+[ext_resource path="res://Graphics/Textures/PlayIcon.png" type="Texture" id=7]
+[ext_resource path="res://Graphics/Textures/PauseIcon.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Dial.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Tock2.wav" type="AudioStream" id=10]
+[ext_resource path="res://Scripts/Record.gd" type="Script" id=11]
+[ext_resource path="res://Graphics/Montserrat-Medium.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://Graphics/Textures/Ellipse.png" type="Texture" id=13]
+[ext_resource path="res://Graphics/Textures/RecordPressed.png" type="Texture" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
 use_filter = true
-font_data = ExtResource( 9 )
+font_data = ExtResource( 12 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 13 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ) ],
+"frames": [ ExtResource( 14 ) ],
 "loop": true,
 "name": "recording",
 "speed": 5.0
@@ -54,7 +57,6 @@ margin_top = 71.0
 margin_right = -10.0
 
 [node name="METRONOME" type="Tabs" parent="Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -154,6 +156,15 @@ margin_bottom = 27.0
 theme = ExtResource( 4 )
 text = "0"
 
+[node name="Midline" type="TextureRect" parent="Tabs/METRONOME"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -220.0
+margin_top = 313.0
+margin_right = 220.0
+margin_bottom = 4.0
+texture = ExtResource( 6 )
+
 [node name="PlayModes" type="MarginContainer" parent="Tabs/METRONOME"]
 anchor_right = 1.0
 margin_top = 270.0
@@ -161,21 +172,43 @@ margin_bottom = 356.0
 custom_constants/margin_right = 146
 custom_constants/margin_left = 146
 
-[node name="Control" type="Control" parent="Tabs/METRONOME/PlayModes"]
+[node name="PlayModeContainer" type="Control" parent="Tabs/METRONOME/PlayModes"]
 margin_left = 146.0
 margin_right = 410.0
 margin_bottom = 86.0
 
-[node name="PlayButton" type="Button" parent="Tabs/METRONOME/PlayModes/Control"]
+[node name="PlayButton" type="Button" parent="Tabs/METRONOME/PlayModes/PlayModeContainer"]
+editor/display_folded = true
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = -12.0
 margin_top = -43.0
 margin_right = 118.0
 margin_bottom = 43.0
-text = "Play"
 
-[node name="TapButton" type="Button" parent="Tabs/METRONOME/PlayModes/Control"]
+[node name="PlayIcon" type="TextureRect" parent="Tabs/METRONOME/PlayModes/PlayModeContainer/PlayButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -19.5
+margin_right = 22.0
+margin_bottom = 19.5
+texture = ExtResource( 7 )
+
+[node name="PauseIcon" type="TextureRect" parent="Tabs/METRONOME/PlayModes/PlayModeContainer/PlayButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -17.0
+margin_right = 13.0
+margin_bottom = 17.0
+texture = ExtResource( 8 )
+
+[node name="TapButton" type="Button" parent="Tabs/METRONOME/PlayModes/PlayModeContainer"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -184,26 +217,25 @@ margin_left = -118.0
 margin_top = -43.0
 margin_right = 12.0
 margin_bottom = 43.0
-text = "Tap"
+text = "TAP"
 
-[node name="DialNode" parent="Tabs/METRONOME" instance=ExtResource( 6 )]
+[node name="DialNode" parent="Tabs/METRONOME" instance=ExtResource( 9 )]
 margin_top = 178.0
 margin_bottom = 178.0
 mouse_filter = 2
 
 [node name="Beats" type="AudioStreamPlayer" parent="Tabs/METRONOME"]
-stream = ExtResource( 7 )
+stream = ExtResource( 10 )
 volume_db = 6.0
 
 [node name="RECORD" type="Tabs" parent="Tabs"]
-editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
 margin_top = 71.0
 margin_right = -10.0
-script = ExtResource( 8 )
+script = ExtResource( 11 )
 
 [node name="HeaderTimer" type="Control" parent="Tabs/RECORD"]
 anchor_right = 1.0
@@ -226,6 +258,7 @@ custom_fonts/font = SubResource( 1 )
 text = "00:00"
 
 [node name="PlaybackButton" type="Button" parent="Tabs/RECORD/HeaderTimer"]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -235,7 +268,28 @@ margin_top = -120.0
 margin_right = 65.0
 margin_bottom = -34.0
 rect_pivot_offset = Vector2( 65, 43 )
-text = "Playback"
+
+[node name="PlaybackIcon" type="TextureRect" parent="Tabs/RECORD/HeaderTimer/PlaybackButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -19.5
+margin_right = 22.0
+margin_bottom = 19.5
+texture = ExtResource( 7 )
+
+[node name="PlaybackPauseIcon" type="TextureRect" parent="Tabs/RECORD/HeaderTimer/PlaybackButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -17.0
+margin_right = 13.0
+margin_bottom = 17.0
+texture = ExtResource( 8 )
 
 [node name="Lower" type="Control" parent="Tabs/RECORD"]
 anchor_top = 0.5
@@ -300,7 +354,7 @@ anchor_bottom = 1.0
 margin_top = 50.0
 [connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/MinusButton" to="Tabs/METRONOME" method="_on_MinusButton_pressed"]
 [connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/PlusButton" to="Tabs/METRONOME" method="_on_Plus_pressed"]
-[connection signal="button_down" from="Tabs/METRONOME/PlayModes/Control/PlayButton" to="Tabs/METRONOME" method="_on_PlayButton_button_down"]
-[connection signal="button_down" from="Tabs/METRONOME/PlayModes/Control/TapButton" to="Tabs/METRONOME" method="_on_TapButton_button_down"]
+[connection signal="button_down" from="Tabs/METRONOME/PlayModes/PlayModeContainer/PlayButton" to="Tabs/METRONOME" method="_on_PlayButton_button_down"]
+[connection signal="button_up" from="Tabs/METRONOME/PlayModes/PlayModeContainer/PlayButton" to="Tabs/METRONOME" method="_on_PlayButton_button_up"]
 [connection signal="pressed" from="Tabs/RECORD/Lower/RecordButton" to="Tabs/RECORD" method="_on_RecordButton_pressed"]
 [connection signal="toggled" from="Tabs/RECORD/Lower/RecordButton" to="Tabs/RECORD" method="_on_TextureButton_toggled"]

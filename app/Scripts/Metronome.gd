@@ -19,6 +19,8 @@ func _ready():
 	time = time_from_tempo($DialNode.tempo, subdivisions)
 	beat_timer.wait_time = time
 	beat_timer.connect("timeout", self, "_timeout")
+	$PlayModes/PlayModeContainer/PlayButton/PlayIcon.visible = true
+	$PlayModes/PlayModeContainer/PlayButton/PauseIcon.visible = false
 	
 	#subtimer - 60/tempo/subdivisions
 
@@ -107,6 +109,7 @@ func _on_TapButton_button_down():
 		# check if tempo is within range - if not, sets to nearest valid tempo
 		var max_time = time_from_tempo($DialNode.MIN_TEMPO, 0)
 		var min_time = time_from_tempo($DialNode.MAX_TEMPO, 0)
+<<<<<<< HEAD
 		if time_bw_taps > max_time:
 			time_bw_taps = max_time
 		elif time_bw_taps < min_time:
@@ -117,3 +120,22 @@ func _on_TapButton_button_down():
 		$DialNode.set_dial_from_tempo(tempo_from_time(time_bw_taps))
 	#print(taps)
 		
+=======
+		if time > max_time:
+			time = max_time
+		elif time < min_time:
+			time = min_time
+		beat_timer.wait_time = time
+		var tempo = tempo_from_time(time)
+		$DialNode.tempo = tempo
+
+
+func _on_PlayButton_button_up():
+	"""When play button is released, toggles play/pause icons."""
+	if playing == false:
+		$PlayModes/PlayModeContainer/PlayButton/PlayIcon.visible = true
+		$PlayModes/PlayModeContainer/PlayButton/PauseIcon.visible = false
+	else:
+		$PlayModes/PlayModeContainer/PlayButton/PlayIcon.visible = false
+		$PlayModes/PlayModeContainer/PlayButton/PauseIcon.visible = true
+>>>>>>> ca921f75a10105d8fedf858cd7481a4190dcd1c9
