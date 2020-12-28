@@ -2,7 +2,7 @@ extends Control
 
 # Declare member variables here. Examples:
 var tween
-var seconds
+#var seconds
 var elapsed
 
 # Called when the node enters the scene tree for the first time.

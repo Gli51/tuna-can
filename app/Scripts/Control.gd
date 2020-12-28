@@ -1,11 +1,12 @@
 extends Control
 
 var curr_pos
-var tempo = 30
+var tempo
 const MAX_TEMPO = 230
 const MIN_TEMPO = 30
 
 func _ready():
+	tempo = 30
 	$NumberTempo.text = str(tempo)
 	set_process(false)
 
@@ -15,8 +16,8 @@ func _process(delta):
 	#    - - | + -
 	#   -----|-----
 	#    - + | + +
-	var x = curr_pos.x
-	var y = curr_pos.y
+	#var x = curr_pos.x
+	#var y = curr_pos.y
 	var angle = fullrad(curr_pos.angle())
 	$DialHand.set_rotation(angle)
 	
@@ -38,11 +39,14 @@ func _process(delta):
 		
 #func set_dial_from_angle(angle):
 
-func set_dial_from_tempo(tempo):
+func set_dial_from_tempo(ntempo):
 	#sets tempo, text, and dialhand
-	tempo = tempo
+	#print("enterd func")
+	tempo = ntempo
+	#print(tempo, ", ", ntempo)
 	$NumberTempo.text = str(tempo)
-	var angle = (tempo / (MAX_TEMPO - MIN_TEMPO)) * 2 * PI
+	var angle = (float(tempo - MIN_TEMPO) / (MAX_TEMPO - MIN_TEMPO)) * 2 * PI
+	#print(angle)
 	$DialHand.set_rotation(angle)
 	
 

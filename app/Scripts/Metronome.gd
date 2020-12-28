@@ -8,7 +8,7 @@ var time
 var beat_timer
 signal flash
 
-var taps = []
+var taps = [null, null, null]
 var tap_index = 0
 
 func _ready():
@@ -70,34 +70,50 @@ func time_from_tempo(tempo, subs):
 	
 func tempo_from_time(time):
 	#seconds/beat -> beats/minute
-	return (1/time) * 60
+	return int(60 / time)
 	
 func avg(arr):
-	var sum = 0
+	var sum = 0.0
 	for x in arr:
 		sum += x
 	return sum / arr.size()
 	
-func _on_TapButton_button_down():
-	#record time, calculate difference in time in seconds. check if it is within range.
-	# set BPM text and beat_timer after 3? taps. If time elapsed > 3 seconds, reset the array to empty?
-	# changing Dial: change tempo, hand. Changing tempo will affect metronome beats and flashes.
-	# Dial currently calculates tempo based on gui_input, should add a function to take changes
-	# based on tempo (takes tempo and changes angle and other stuff)
+func num_null(arr):
+	var sum = 0
+	for x in arr:
+		if x == null:
+			sum += 1
+	return sum
 	
+func _on_TapButton_button_down():
+	#elapsed time in milliseconds since engine started running.
+	#Need to test if this causes any issues at long runtimes
 	var os_time = OS.get_ticks_msec()
-	taps.append(os_time)
-	print(taps)
-	if taps.size() > 2:
-		#calculate average - minimum
-		var time = avg(taps) - taps.min()
+	
+	#resets taps array if time since last tap is > 2.5 seconds
+	if num_null(taps) == 0 and os_time - taps.max() > 2500:
+		taps = [null, null, null]
+	
+	taps[tap_index] = os_time
+	tap_index += 1
+	if tap_index > 2:
+		tap_index = 0
 		
+	if num_null(taps) == 0:
+		print("enough taps")
+		#calculate avg time between taps in seconds
+		var time_bw_taps = (avg(taps) - taps.min())/1000.0
+		
+		# check if tempo is within range - if not, sets to nearest valid tempo
 		var max_time = time_from_tempo($DialNode.MIN_TEMPO, 0)
 		var min_time = time_from_tempo($DialNode.MAX_TEMPO, 0)
-		if time > max_time:
-			time = max_time
-		elif time < min_time:
-			time = min_time
-		beat_timer.wait_time = time
-		var tempo = tempo_from_time(time)
-		$DialNode.tempo = tempo
+		if time_bw_taps > max_time:
+			time_bw_taps = max_time
+		elif time_bw_taps < min_time:
+			time_bw_taps = min_time
+		print(time_bw_taps)
+		
+		# sets the dial according to tempo
+		$DialNode.set_dial_from_tempo(tempo_from_time(time_bw_taps))
+	#print(taps)
+		
