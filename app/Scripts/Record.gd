@@ -14,6 +14,9 @@ func _ready():
 	var rec_idx = AudioServer.get_bus_index("Record")
 	recording_bus = AudioServer.get_bus_effect(rec_idx, 0)
 	
+	$Lower/RecordButton/MicIcon.visible = true
+	$Lower/RecordButton/StopIcon.visible = false
+
 func _process(delta):
 	if recording_bus.is_recording_active():
 #	if is_recording == true:
@@ -31,19 +34,19 @@ func increment_timer():
 	$HeaderTimer/Timer.set_text(str_elapsed)
 
 #TODO: Maybe when toggled the timer label can flash opacity to show that it's running!
-func _on_TextureButton_toggled(button_pressed):
+func _on_RecordButton_toggled(button_pressed):
 	"""When recording button is toggled, enables/disables playback button and starts or stops timer."""
 	if button_pressed == true:
 		str_elapsed = "00 : 00"
 		increment_timer()
-		#toggles recording button appearance
-		$Lower/RecordButton/ButtonSprite.animation =  "recording"
+		$Lower/RecordButton/MicIcon.visible = false
+		$Lower/RecordButton/StopIcon.visible = true
 		#stop any playback that's happening + clear the temp cache
 		#disable playback button(greyed out)
 		#begin recording from the mic + storing in temp file
 	else:
-		$Lower/RecordButton/ButtonSprite.animation =  "default"
-		#reset record button color
+		$Lower/RecordButton/MicIcon.visible = true
+		$Lower/RecordButton/StopIcon.visible = false
 		#enable playback button
 
 
@@ -60,7 +63,7 @@ func _on_RecordButton_pressed():
 		
 	else:
 		recording_bus.set_recording_active(true)
-		_on_TextureButton_toggled(true)
+		_on_RecordButton_toggled(true)
 #
 #	if is_recording == false:
 #		is_recording = true
