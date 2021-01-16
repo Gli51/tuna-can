@@ -125,4 +125,5 @@ custom_colors/font_color = Color( 0.239216, 0.239216, 0.239216, 1 )
 text = "Tempo"
 align = 1
 valign = 1
+
 [connection signal="gui_input" from="DialOuter" to="." method="_on_DialOuter_gui_input"]
