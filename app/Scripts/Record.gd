@@ -1,16 +1,23 @@
 extends Tabs
 
 var elapsed = 0
-var recording = false
+#var recording = false
 var str_elapsed = "00 : 00"
+
+var recording_bus
+var recording
 
 func _ready():
 	$HeaderTimer/Timer.set_text(str_elapsed)
+
+	var rec_idx = AudioServer.get_bus_index("Record")
+	recording_bus = AudioServer.get_bus_effect(rec_idx, 0)
+	
 	$Lower/RecordButton/MicIcon.visible = true
 	$Lower/RecordButton/StopIcon.visible = false
 
 func _process(delta):
-	if recording == true:
+	if recording_bus.is_recording_active():
 		elapsed += delta
 		increment_timer()
 	else:
@@ -42,11 +49,17 @@ func _on_RecordButton_toggled(button_pressed):
 
 
 func _on_RecordButton_pressed():
-	if recording == false:
-		recording = true
+	if recording_bus.is_recording_active():
+		recording = recording_bus.get_recording()
+		recording_bus.set_recording_active(false)
+
+		print("recording saved")
+		#saving the recording
+		var pathname = "res://test.wav"
+		recording.save_to_wav(pathname)
 	else:
-		recording = false
-	_on_RecordButton_toggled(recording)
+		recording_bus.set_recording_active(true)
+	_on_RecordButton_toggled(recording_bus.is_recording_active())
 	
 #function for playback button toggle.
 	#even when playback button is on, recording should be enabled, but not vice versa.

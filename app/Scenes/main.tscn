@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Graphics/SnazzyOrange.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/main.gd" type="Script" id=2]
@@ -18,10 +18,14 @@
 [ext_resource path="res://Graphics/Textures/SettingsIcon.png" type="Texture" id=16]
 [ext_resource path="res://Graphics/Textures/SettingsIconPressed.png" type="Texture" id=17]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="AudioStreamGenerator" id=1]
+
+[sub_resource type="DynamicFont" id=2]
 size = 64
 use_filter = true
 font_data = ExtResource( 11 )
+
+[sub_resource type="AudioStreamMicrophone" id=3]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -46,8 +50,10 @@ margin_left = 10.0
 margin_top = 71.0
 margin_right = -10.0
 
+[node name="Drone" type="AudioStreamPlayer" parent="Tabs/TUNER"]
+stream = SubResource( 1 )
+
 [node name="METRONOME" type="Tabs" parent="Tabs"]
-editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -225,7 +231,7 @@ stream = ExtResource( 9 )
 volume_db = 6.0
 
 [node name="RECORD" type="Tabs" parent="Tabs"]
-editor/display_folded = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -250,7 +256,7 @@ margin_top = 30.0
 margin_right = 93.5
 margin_bottom = 79.0
 rect_pivot_offset = Vector2( 93.5, 39.5 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "00:00"
 
 [node name="PlaybackButton" type="Button" parent="Tabs/RECORD/HeaderTimer"]
@@ -328,6 +334,11 @@ margin_right = 26.0
 margin_bottom = 26.0
 texture = ExtResource( 15 )
 
+[node name="Recorder" type="AudioStreamPlayer" parent="Tabs/RECORD"]
+stream = SubResource( 3 )
+autoplay = true
+bus = "Record"
+
 [node name="HeaderBar" type="Control" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -370,7 +381,6 @@ stretch_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 50.0
-
 [connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/MinusButton" to="Tabs/METRONOME" method="_on_MinusButton_pressed"]
 [connection signal="pressed" from="Tabs/METRONOME/IncrementRow/Ticks/TickContainer/PlusButton" to="Tabs/METRONOME" method="_on_Plus_pressed"]
 [connection signal="button_down" from="Tabs/METRONOME/PlayModes/PlayModeContainer/PlayButton" to="Tabs/METRONOME" method="_on_PlayButton_button_down"]
