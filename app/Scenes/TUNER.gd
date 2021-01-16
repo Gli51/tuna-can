@@ -6,7 +6,7 @@ Drone - use audio bus to modulate pitch AudioEffectPitchShift
 """
 var base_frequency = 440
 var octave = 4
-var note = "C"
+var note = "A"
 
 # String range C1 - A7
 # Piano range A0-C8
@@ -38,8 +38,8 @@ func _ready():
 
 func _process(delta):
 	$Drone.set_pitch_scale(octave + float(note_dict.get(note)) / 12)
-	#if !$Drone.playing:
-		#$Drone.play()
+	if !$Drone.playing:
+		$Drone.play()
 
 # change base_frequency button
 
