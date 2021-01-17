@@ -6,6 +6,7 @@ var str_elapsed = "00 : 00"
 
 var recording_bus
 var recording
+var recordingname
 
 func _ready():
 	$HeaderTimer/Timer.set_text(str_elapsed)
@@ -54,8 +55,10 @@ func _on_RecordButton_pressed():
 		recording_bus.set_recording_active(false)
 
 		print("recording saved")
-		#saving the recording
-		var pathname = "res://test.wav"
+		
+		#saving the recording, additional permissions for WRITE EXTERNAL STORAGE or request_permission(RECORD_AUDIO)?
+		recordingname = "test"
+		var pathname = OS.get_system_dir(2) + recordingname + ".wav" #"res://test.wav" # 
 		recording.save_to_wav(pathname)
 	else:
 		recording_bus.set_recording_active(true)

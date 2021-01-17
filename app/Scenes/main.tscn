@@ -20,12 +20,12 @@
 [ext_resource path="res://Graphics/Textures/SettingsIcon.png" type="Texture" id=18]
 [ext_resource path="res://Graphics/Textures/SettingsIconPressed.png" type="Texture" id=19]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 64
 use_filter = true
 font_data = ExtResource( 13 )
 
-[sub_resource type="AudioStreamMicrophone" id=3]
+[sub_resource type="AudioStreamMicrophone" id=2]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -257,7 +257,7 @@ margin_top = 30.0
 margin_right = 93.5
 margin_bottom = 79.0
 rect_pivot_offset = Vector2( 93.5, 39.5 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "00:00"
 
 [node name="PlaybackButton" type="Button" parent="Tabs/RECORD/HeaderTimer"]
@@ -336,7 +336,7 @@ margin_bottom = 26.0
 texture = ExtResource( 17 )
 
 [node name="Recorder" type="AudioStreamPlayer" parent="Tabs/RECORD"]
-stream = SubResource( 3 )
+stream = SubResource( 2 )
 autoplay = true
 bus = "Record"
 
