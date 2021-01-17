@@ -58,7 +58,7 @@ func _on_RecordButton_pressed():
 		
 		#saving the recording, additional permissions for WRITE EXTERNAL STORAGE or request_permission(RECORD_AUDIO)?
 		recordingname = "test"
-		var pathname = OS.get_system_dir(2) + recordingname + ".wav" #"res://test.wav" # 
+		var pathname = OS.get_system_dir(2) + "/" + recordingname + ".wav" #"res://test.wav" # 
 		recording.save_to_wav(pathname)
 	else:
 		recording_bus.set_recording_active(true)

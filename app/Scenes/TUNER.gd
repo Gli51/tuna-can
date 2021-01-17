@@ -38,8 +38,8 @@ func _ready():
 
 func _process(delta):
 	$Drone.set_pitch_scale(octave + float(note_dict.get(note)) / 12)
-	if !$Drone.playing:
-		$Drone.play()
+	#if !$Drone.playing:
+		#$Drone.play()
 
 # change base_frequency button
 
