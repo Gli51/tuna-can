@@ -55,3 +55,4 @@ TabContainer/styles/panel = ExtResource( 3 )
 TabContainer/styles/tab_bg = ExtResource( 3 )
 TabContainer/styles/tab_disabled = ExtResource( 3 )
 TabContainer/styles/tab_fg = ExtResource( 3 )
+
