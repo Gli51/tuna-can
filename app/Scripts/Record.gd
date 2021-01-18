@@ -70,6 +70,8 @@ func _on_RecordButton_pressed():
 		
 		#saving the recording, additional permissions for WRITE EXTERNAL STORAGE or request_permission(RECORD_AUDIO)?
 		recordingname = "test"
+		var dir = Directory.new()
+		dir.make_dir(OS.get_system_dir(2) + "/tunacan/")
 		var pathname = OS.get_system_dir(2) + "/tunacan/" + recordingname + ".wav" #"res://test.wav" # 
 		recording.save_to_wav(pathname)
 	else:
