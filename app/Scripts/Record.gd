@@ -1,7 +1,6 @@
 extends Tabs
 
 var elapsed = 0
-#var recording = false
 var str_elapsed = "00 : 00"
 
 var recording_bus
@@ -16,6 +15,9 @@ func _ready():
 	
 	$Lower/RecordButton/MicIcon.visible = true
 	$Lower/RecordButton/StopIcon.visible = false
+	
+	$HeaderTimer/PlaybackButton/PlaybackIcon.visible = true
+	$HeaderTimer/PlaybackButton/PlaybackPauseIcon.visible = false
 
 func _process(delta):
 	if recording_bus.is_recording_active():
@@ -23,6 +25,13 @@ func _process(delta):
 		increment_timer()
 	else:
 		elapsed = 0
+		#TODO: this may check unnecessarily. Want to make sure after finishing playing, the playback skin is correct
+		if $Playback.playing and !$Playback.stream_paused:
+			$HeaderTimer/PlaybackButton/PlaybackIcon.visible = false
+			$HeaderTimer/PlaybackButton/PlaybackPauseIcon.visible = true
+		else:
+			$HeaderTimer/PlaybackButton/PlaybackIcon.visible = true
+			$HeaderTimer/PlaybackButton/PlaybackPauseIcon.visible = false
 		
 
 func increment_timer():
@@ -56,6 +65,9 @@ func _on_RecordButton_pressed():
 
 		print("recording saved")
 		
+		var dir = Directory.new()
+		dir.make_dir(OS.get_system_dir(2) + "/tunacan/")
+		
 		#saving the recording, additional permissions for WRITE EXTERNAL STORAGE or request_permission(RECORD_AUDIO)?
 		recordingname = "test"
 		var pathname = OS.get_system_dir(2) + "/tunacan/" + recordingname + ".wav" #"res://test.wav" # 
@@ -63,11 +75,6 @@ func _on_RecordButton_pressed():
 	else:
 		recording_bus.set_recording_active(true)
 	_on_RecordButton_toggled(recording_bus.is_recording_active())
-	
-#function for playback button toggle.
-	#even when playback button is on, recording should be enabled, but not vice versa.
-	#play stored audio
-	#progress the audio visualizer graphics
 
 #function timeout
 #after 60 minutes passes, stop recording
@@ -76,3 +83,22 @@ func time_out():
 	pass
 	#if minutes >= 60:
 		#_on_TextureButton_toggled(false)
+		
+#function for playback button toggle.
+	#even when playback button is on, recording should be enabled, but not vice versa.
+	#play stored audio
+	#progress the audio visualizer graphics		
+# button shows triangle whenever recording isn't playing, pause button otherwise.
+# if recording is playing, can pause, or wait for recording to end.
+# if recording not playing, can start playing or unpause (are they different?)
+func _on_PlaybackButton_pressed():
+	print("toggled")
+	if not recording_bus.is_recording_active() and recording != null:
+		print("playback toggle valid")
+		if $Playback.playing == false:
+			print("play")
+			$Playback.stream = recording
+			$Playback.play()
+		#when you want to pause
+		else:
+			$Playback.stream_paused = !$Playback.stream_paused
