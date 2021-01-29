@@ -65,9 +65,6 @@ func _on_RecordButton_pressed():
 
 		print("recording saved")
 		
-		var dir = Directory.new()
-		dir.make_dir(OS.get_system_dir(2) + "/tunacan/")
-		
 		#saving the recording, additional permissions for WRITE EXTERNAL STORAGE or request_permission(RECORD_AUDIO)?
 		recordingname = "test"
 		var dir = Directory.new()

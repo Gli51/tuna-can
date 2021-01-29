@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Graphics/SnazzyOrange.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/main.gd" type="Script" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Graphics/Textures/StopIcon.png" type="Texture" id=17]
 [ext_resource path="res://Graphics/Textures/SettingsIcon.png" type="Texture" id=18]
 [ext_resource path="res://Graphics/Textures/SettingsIconPressed.png" type="Texture" id=19]
+[ext_resource path="res://Graphics/Textures/Flash Button.png" type="Texture" id=20]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -58,7 +59,6 @@ script = ExtResource( 3 )
 stream = ExtResource( 4 )
 
 [node name="METRONOME" type="Tabs" parent="Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -69,6 +69,9 @@ script = ExtResource( 5 )
 [node name="MetroVisualizer" type="Control" parent="Tabs/METRONOME"]
 anchor_right = 1.0
 margin_bottom = 110.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="Tabs/METRONOME/MetroVisualizer"]
 anchor_right = 1.0
@@ -170,6 +173,9 @@ margin_top = 313.0
 margin_right = 220.0
 margin_bottom = 4.0
 texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PlayModes" type="MarginContainer" parent="Tabs/METRONOME"]
 anchor_right = 1.0
@@ -232,6 +238,18 @@ mouse_filter = 2
 [node name="Beats" type="AudioStreamPlayer" parent="Tabs/METRONOME"]
 stream = ExtResource( 11 )
 volume_db = 6.0
+
+[node name="FlashButton" type="TextureButton" parent="Tabs/METRONOME"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -76.9999
+margin_right = 77.0
+margin_bottom = -19.9999
+texture_normal = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RECORD" type="Tabs" parent="Tabs"]
 visible = false
@@ -354,6 +372,10 @@ margin_bottom = 60.0
 [node name="ColorRect" type="ColorRect" parent="HeaderBar"]
 margin_right = 576.0
 margin_bottom = 60.0
+color = Color( 0.768627, 0.768627, 0.768627, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="HeaderBar"]
 modulate = Color( 0, 0, 0, 1 )
